@@ -13,37 +13,26 @@ class Estandar {
 
     // Métodos
     Listar() {
-        const miTabla = document.getElementById("tabla");
+        let rango;
         if (nota >= 90 && nota <= 100) {
-            // El número está dentro del rango 90 a 100
-            console.log("El número está dentro del rango 0 a 10");
+            rango = "rango90-100";
         } else if (nota >= 80 && nota <= 89) {
-            // El número está dentro del rango 20 a 30, haz algo específico aquí
-            console.log("El número está dentro del rango 20 a 30");
+            rango = "rango80-89";
         } else if (nota >= 70 && nota <= 79) {
-            // El número está dentro del rango 40 a 50, haz algo específico aquí
-            console.log("El número está dentro del rango 40 a 50");
+            rango = "rango70-79";
         } else if (nota >= 60 && nota <= 69) {
-            // El número está dentro del rango 40 a 50, haz algo específico aquí
-            console.log("El número está dentro del rango 40 a 50");
-        } else if (nota >= 1 && nota < 60) {
-            // El número está dentro del rango 40 a 50, haz algo específico aquí
-            console.log("El número está dentro del rango 40 a 50");
-        } else if (nota ===0) {
-            // El número está dentro del rango 40 a 50, haz algo específico aquí
-            console.log("El número está dentro del rango 40 a 50");
+            rango = "rango60-69";
+        } else if (nota < 60 && nota >= 1) {
+            rango = "rangoMenos60";
+        } else if (nota === 0) {
+            rango = "payaso";
         } else {
-            // El número está fuera de los tres rangos especificados
-            console.log("El número está fuera de los rangos especificados");
+            console.log("Rango malardo pa' ni pa eso sirves");
         }
-        // recorrer todas las filas de la tabla
-        for (let i = 0; i < miTabla.rows.length; i++) {
-            const fila = miTabla.rows[i];
-            // const celda = fila.cells[1];
-            // const valor = parseInt(celda.innerHTML);
-
-            // si el valor de la celda no está dentro del rango del filtro, ocultar la fila
-            if (valor < minimo || valor > maximo) {
+        const filas = document.getElementsByTagName("tr");
+        for (let i = 1; i < filas.length; i++) {
+            const fila = filas[i];
+            if (fila.id !== rango) {
                 fila.style.display = "none";
             } else {
                 fila.style.display = "";
@@ -52,14 +41,17 @@ class Estandar {
     }
 }
 
-const nombre = prompt("Ingrese su nombre");
-const nota = prompt("Ingrese su nota");
+const nombre = prompt("Ingrese su nombre: ");
+const nota = parseInt(prompt("Ingrese su nota: "));
 const estudiante1 = new Estudiante(nombre);
 const estandar1 = new Estandar(nota);
 
-const saludo = `¡Hola ${estudiante1.nombre}! Selecciona como quieres saber tu equivalente`;
+const saludo = `¡Hola ${estudiante1.nombre}! Esta sería tu nota en distintas medidas`;
 document.getElementById("titulo").textContent = saludo;
 
 const miBoton = document.getElementById("filter");
-miBoton.addEventListener("click", estandar1.Listar());
+// miBoton.addEventListener('click', estandar1.Listar());
+miBoton.addEventListener('click', () => {
+    estandar1.Listar();
+});
 
