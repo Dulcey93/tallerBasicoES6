@@ -46,12 +46,14 @@ const nota = parseInt(prompt("Ingrese su nota: "));
 const estudiante1 = new Estudiante(nombre);
 const estandar1 = new Estandar(nota);
 
-const saludo = `¡Hola ${estudiante1.nombre}! Esta sería tu nota en distintas medidas`;
+const saludo = `¡Hola ${estudiante1.nombre.toUpperCase()}! Esta es la tabla de notas universales, pulsa filtrar`;
 document.getElementById("titulo").textContent = saludo;
 
 const miBoton = document.getElementById("filter");
 // miBoton.addEventListener('click', estandar1.Listar());
-miBoton.addEventListener('click', () => {
+miBoton.addEventListener('click', (saludo) => {
     estandar1.Listar();
+    saludo = `${estudiante1.nombre.toUpperCase()}, Esta sería tu nota en distintas medidas`;
+    document.getElementById("titulo").textContent = saludo;
 });
 
